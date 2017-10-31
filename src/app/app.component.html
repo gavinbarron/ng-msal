@@ -1,6 +1,6 @@
 <button (click)="login()" type="button" *ngIf="!user">Login</button>
 <button (click)="getPhoto()" type="button" *ngIf="user">Show Photo</button>
-<button (click)="callAPI()" type="button" *ngIf="user">Call Graph's {{graphService.version}}/me API</button>
+<button (click)="callMeApi()" type="button" *ngIf="user">Call Graph's {{graphService.version}}/me API</button>
 <button (click)="callDrivesApi()" type="button" *ngIf="user">Call Graph's {{graphService.version}}/drives API</button>
 <button (click)="logout()" type="button" *ngIf="user">Logout</button>
 <h3 *ngIf="user">

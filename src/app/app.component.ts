@@ -28,6 +28,7 @@ export class AppComponent implements OnInit  {
         this.user = this.authService.getUser();
         if (this.user === null) { return; }
 
+        // If we have a user then we can grab the token for that user
         this.getToken();
     }
 
@@ -45,7 +46,10 @@ export class AppComponent implements OnInit  {
         this.graphService.getPhoto(this.token)
             .subscribe(photo => {
                 const url = window.URL;
-                this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(url.createObjectURL(photo));
+                // Create an objectUrl for the blob
+                const blobUrl = url.createObjectURL(photo);
+                // Tell Angular that it should trust this Url
+                this.photo = this.sanitizer.bypassSecurityTrustResourceUrl(blobUrl);
             }, error => {
                 console.error(error);
                 this.apiCallFailed = true;
@@ -67,7 +71,7 @@ export class AppComponent implements OnInit  {
             });
     }
 
-    private callAPI(): void {
+    private callMeApi(): void {
         this.apiCallFailed = false;
         this.graphService.getUserInfo(this.token)
             .subscribe(data => {

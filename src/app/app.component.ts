@@ -71,7 +71,7 @@ export class AppComponent implements OnInit  {
             });
     }
 
-    private callMeApi(): void {
+    public callMeApi(): void {
         this.apiCallFailed = false;
         this.graphService.getUserInfo(this.token)
             .subscribe(data => {
@@ -82,7 +82,7 @@ export class AppComponent implements OnInit  {
             });
     }
 
-    private callDrivesApi(): void {
+    public callDrivesApi(): void {
         this.apiCallFailed = false;
 
         this.graphService.getDrive(this.token)
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit  {
             });
     }
 
-    private logout(): void {
+    public logout(): void {
         this.authService.logout();
     }
 }

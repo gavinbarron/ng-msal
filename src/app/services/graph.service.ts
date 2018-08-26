@@ -1,7 +1,11 @@
+
+import {throwError as observableThrowError} from 'rxjs';
+
+import {catchError} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/catch';
+import { Observable } from 'rxjs';
+
 
 @Injectable()
 export class GraphService {
@@ -13,19 +17,19 @@ export class GraphService {
     }
 
     public getUserInfo(token: string) {
-      return this.makeJsonRequest(token, `${this.graphUrl}/me`)
-            .catch(response => Observable.throw(response.text()));
+      return this.makeJsonRequest(token, `${this.graphUrl}/me`).pipe(
+            catchError(response => observableThrowError(response.text())));
     }
 
     public getDrive(token: string) {
-      return this.makeJsonRequest(token, `${this.graphUrl}/drive`)
-          .catch(response => Observable.throw(response.text()));
+      return this.makeJsonRequest(token, `${this.graphUrl}/drive`).pipe(
+          catchError(response => observableThrowError(response.text())));
     }
 
     public getPhoto(token: string): Observable<Blob> {
       // Set the responseType to get the Blob returned.
-      return this.http.get(`${this.graphUrl}/me/photo/$value`, { headers: this.buildHeaders(token), responseType: 'blob' })
-            .catch(response => Observable.throw(response.text()));
+      return this.http.get(`${this.graphUrl}/me/photo/$value`, { headers: this.buildHeaders(token), responseType: 'blob' }).pipe(
+            catchError(response => observableThrowError(response.text())));
     }
 
     private makeJsonRequest(token: string, endpoint: string) {

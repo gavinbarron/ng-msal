@@ -1,5 +1,7 @@
 # MSAL + Angular Sample
 
+** **This sample is now archived as there is plenty of other examples** **
+
 - Uses [MSAL.js](https://github.com/AzureAD/microsoft-authentication-library-for-js) for authentication against the v2 endpoint
 - Showcases making REST calls to the [Microsoft Graph](https://graph,microsoft.com) with the token obtained by MSAL
   - JSON Responses
